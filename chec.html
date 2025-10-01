@@ -132,7 +132,18 @@ button { padding:25px 55px;font-size:40px;border:none;border-radius:90px;cursor:
 </div>
 
 <script>
-let prizes = {
+// Cookie helpers
+function setCookie(name,value,days){
+    const d = new Date(); d.setTime(d.getTime() + (days*24*60*60*1000));
+    document.cookie = name + "=" + JSON.stringify(value) + ";expires="+d.toUTCString()+";path=/";
+}
+function getCookie(name){
+    const c = document.cookie.split('; ').find(row=>row.startsWith(name+'='));
+    return c ? JSON.parse(c.split('=')[1]) : null;
+}
+
+// Initial prizes
+let defaultPrizes = {
  "Drink Coupon":5,
   "Food Coupon":20,
   "Knorr Shell Box":5,
@@ -140,6 +151,9 @@ let prizes = {
   "KMF Sachet":5,
   "CMP Docket":5
 };
+
+// Load prizes from cookie or use defaults
+let prizes = getCookie('prizes') || defaultPrizes;
 
 let selectedCards=[], matchedPairs=0, countdown=20, countdownInterval;
 const startSound=document.getElementById('startSound');
@@ -232,6 +246,9 @@ function showWinner(){
   let [gift]=available[Math.floor(Math.random()*available.length)];
   prizes[gift]--;
   
+  // Save updated prizes to cookie for persistence
+  setCookie('prizes',prizes,7);
+
   const allWinnerPages = document.querySelectorAll('.winnerPage');
   allWinnerPages.forEach(p=>p.style.display='none'); 
   let winnerPage;
