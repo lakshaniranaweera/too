@@ -118,11 +118,11 @@ button { padding:25px 55px;font-size:40px;border:none;border-radius:90px;cursor:
 </div>
 
 <!-- Try Again -->
-<div id="tryAgainPage" class="winnerPage">
+<!-- <div id="tryAgainPage" class="winnerPage">
   <h1>ALMOST MAGIC!</h1>
   <img src="mmm.png" alt="Try Again" width="300" height="200">
   <h2>Your Better luck has run out</h2>
-</div>
+</div> -->
 
 <!-- Timeout -->
 <div id="timeoutPage" class="winnerPage">
@@ -160,7 +160,7 @@ const startSound=document.getElementById('startSound');
 const gameSound=document.getElementById('gameSound');
 const selectSound=document.getElementById('selectSound');
 const winnerSound=document.getElementById('winnerSound');
-const tryAgainSound=document.getElementById('tryAgainSound');
+// const tryAgainSound=document.getElementById('tryAgainSound');
 
 window.onload = ()=>{
   const video = document.getElementById('introVideo');
@@ -263,14 +263,14 @@ function showWinner(){
   winnerPage.onclick = ()=>goVideo();
 }
 
-function showTryAgain(){
-  gameSound.pause();
-  tryAgainSound.currentTime=0; tryAgainSound.play();
-  document.getElementById('gamePage').style.display='none';
-  const page=document.getElementById('tryAgainPage');
-  page.style.display='flex';
-  page.onclick = ()=>goVideo();
-}
+// function showTryAgain(){
+//   gameSound.pause();
+//   tryAgainSound.currentTime=0; tryAgainSound.play();
+//   document.getElementById('gamePage').style.display='none';
+//   const page=document.getElementById('tryAgainPage');
+//   page.style.display='flex';
+//   page.onclick = ()=>goVideo();
+// }
 
 function showTimeout(){
   gameSound.pause();
